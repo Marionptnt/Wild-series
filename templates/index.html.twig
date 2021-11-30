@@ -1,20 +1,10 @@
-<!doctype html>
+{% extends "base.html.twig" %}
 
-<html lang="en">
+{% block body %}
 
-	<head>
 
-		<meta charset="UTF-8">
+	<h1>{{ website }}</h1>
 
-		<title>Wild Series</title>
+	{# \	<img src="{{ asset('build/path_to_image.png') }}" alt=""/> #}
 
-	</head>
-
-	<body>
-
-		<h1>{{ website }}
-		</h1>
-
-	</body>
-
-</html>
+{% endblock %}

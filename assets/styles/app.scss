@@ -1,0 +1,23 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+*:root {
+    --bg-color-body: #303030;
+    --button: #F4B324;
+    --font-color: #F6E7D8;
+    --title-font-family: 'Archivo Black', sans-serif;
+    --text-font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: #303030;
+    font-family: var(--text-font-family);
+    color: var(--font-color);
+    font-size: 18px;
+}
+
+.navbar {
+    background-color: var(--button);
+    color: var(--bg-color-body);
+    font-family: var(--title-font-family);
+}
