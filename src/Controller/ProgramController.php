@@ -33,7 +33,7 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    /* écriture requirements plus condensé-->
+    /* écriture requirements plus condensé--> */
 
     /**
      
@@ -55,7 +55,7 @@ class ProgramController extends AbstractController
     // redirection vers la page 'program_show',
     // correspondant à l'url /program/4
     return $this->redirectToRoute('program_show', ['id' => 4]);
-}
+}*/
 
 
     /**
