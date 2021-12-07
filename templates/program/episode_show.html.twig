@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div class="card m-5" style="width: 18rem; margin-left: 2rem; margin-right: 2rem">
+		<img class="card-img-top" style="height: 20rem;" src="{{program.poster}}" alt="Card image cap">
+		<div class="card-body">
+			<h5 class="card-title">{{program.title}}</h5>
+			<div>
+				<h3>
+					Saison
+					{{ season.number }}
+				</h3>
+				<p>
+					Episode
+					{{ episode.number }}
+					:
+					{{ episode.title }}
+				</p>
+
+				<h2>Résumé :</h2>
+				<p>
+					{{ episode.synopsis }}
+				</p>
+			</div>
+			<p class="card-text" style="height: 5rem; font-size: 1rem;">{{episodes.synopsis}}</p>
+
+		</div>
+	</div>
+{% endblock %}

@@ -22,12 +22,15 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
         $program->setCategory($this->getReference('category_5'));
 
+
         //ici les acteurs sont insérés via une boucle pour être DRY mais ce n'est pas obligatoire
 
         for ($i = 0; $i < count(ActorFixtures::ACTORS); $i++) {
 
             $program->addActor($this->getReference('actor_' . $i));
         }
+
+
 
         $manager->persist($program);
 
@@ -45,6 +48,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             ActorFixtures::class,
 
             CategoryFixtures::class,
+
 
         ];
     }

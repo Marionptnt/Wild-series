@@ -4,13 +4,18 @@
 		<img src="{{program.poster}}" alt="image of the program">
 		<div class="">
 			<h3 class="">{{program.title}}</h3>
-			<p class="">{{program.summary}}</p>
-			<p class="">Saison :
+			<p>Saison
+				{{season.number}}
+				/ Année :
 				{{season.number}}</p>
 			{% for episode in episodes %}
-				<p class="" style="height: 5rem; font-size: 1rem;">{{episode.title}}
-					: Épisode
-					{{episode.number}}</p>
+				<a href="{{ path("program_episode_show", {programId: program.id, seasonId : season.id, episodeId : episode.id})}}">
+					<p class="" style="height: 5rem; font-size: 1rem;">Épisode
+						{{episode.number}}
+						:
+						{{episode.title}}
+					</p>
+				</a>
 			{% endfor %}
 			<a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-primary">Voir la fiche</a>
 		</div>

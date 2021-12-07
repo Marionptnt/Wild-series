@@ -45,9 +45,15 @@ class Program
      */
     private $actor;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Season::class, mappedBy="program", orphanRemoval=true)
+     */
+    private $seasons;
+
     public function __construct()
     {
         $this->actor = new ArrayCollection();
+        $this->seasons = new ArrayCollection();
     }
 
 
@@ -124,6 +130,36 @@ class Program
     public function removeActor(Actor $actor): self
     {
         $this->actor->removeElement($actor);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Season[]
+     */
+    public function getSeasons(): Collection
+    {
+        return $this->seasons;
+    }
+
+    public function addSeason(Season $season): self
+    {
+        if (!$this->seasons->contains($season)) {
+            $this->seasons[] = $season;
+            $season->setProgram($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeason(Season $season): self
+    {
+        if ($this->seasons->removeElement($season)) {
+            // set the owning side to null (unless already changed)
+            if ($season->getProgram() === $this) {
+                $season->setProgram(null);
+            }
+        }
 
         return $this;
     }

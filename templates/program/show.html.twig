@@ -6,18 +6,23 @@
 {% block body %}
 	<div class="programs-list">
 		<div class="media">
-			<img src=" {{program.poster}} " alt=" {{ program.title }} poster" width=" 180px">
+			<img src=" {{program.poster}} " alt="image de la série {{ program.title }} poster" width=" 180px">
 			<div class="media-body">
 				<h1>{{ program.title }}</h1>
 				<p>{{ program.summary }}</p>
 				<p>Catégorie :
 					{{ program.category.name }}</p>
+
+
+				{% for season in seasons %}
+					<a href="{{ path("program_season_show", { programId: program.id, seasonId : season.id }) }}">
+						<p>Saison
+							{{season.number}}
+							/ Année :
+							{{season.number}}</p>
+					</a>
+				{% endfor %}
 			</div>
-			{% for season in seasons %}
-				<a href="{{ path("program_season_show", { programId: program.id, seasonId : season.id }) }}">
-					<p>{{season.number}}</p>
-				</a>
-			{% endfor %}
 		</div>
 	</div>
 	<a href="{{ path('program_index') }}">
