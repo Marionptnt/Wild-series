@@ -14,8 +14,7 @@ body {
     font-family: var(--text-font-family);
     color: var(--font-color);
     font-size: 12px;
-    margin: auto;
-    margin-top: 100px;
+    justify-content: center;
 }
 
 .navbar {
@@ -24,10 +23,23 @@ body {
     font-family: var(--title-font-family);
 }
 
+.programs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title-program {
+    color: var(--button);
+}
+
 .media {
-    width: 25%;
-    height: 30%;
+    width: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
     border: var(--button) 2px solid;
     border-radius: 5px;
     background-color: #6d6a6a;

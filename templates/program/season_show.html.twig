@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div class="media">
+		<img src="{{program.poster}}" alt="image of the program">
+		<div class="">
+			<h3 class="">{{program.title}}</h3>
+			<p class="">{{program.summary}}</p>
+			<p class="">Saison :
+				{{season.number}}</p>
+			{% for episode in episodes %}
+				<p class="" style="height: 5rem; font-size: 1rem;">{{episode.title}}
+					: Épisode
+					{{episode.number}}</p>
+			{% endfor %}
+			<a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-primary">Voir la fiche</a>
+		</div>
+	</div>
+{% endblock %}

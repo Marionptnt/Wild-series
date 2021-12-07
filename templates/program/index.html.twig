@@ -10,12 +10,15 @@
 	{% for program in programs %}
 		<div class="programs-list">
 			<div class="media">
-				<h2>{{ loop.index }}
-					/
-					{{ program.title }}
-					- Catégorie :
-					{{ program.category.name }}</h2>
+				<h2 class="title-program">{{ loop.index }}
+					-
+					{{ program.title }}</h2>
+				<img src="{{program.poster}}" alt="{{ program.title }} poster" width="180px">
+
+				<h3>Catégorie :
+					{{ program.category.name }}</h3>
 				<p>{{ program.summary }}</p>
+				{# Lien vers la fiche de la série : #}
 				<a href="{{ path("program_show", { id: program.id }) }}">
 					<button class="button">Voir la fiche
 					</button>

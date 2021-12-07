@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\Entity(repositoryClass=ActorRepository::class)
  */
-class Category
+class Actor
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Program::class, mappedBy="category")
+     * @ORM\ManyToMany(targetEntity=Program::class, mappedBy="actor")
      */
     private $programs;
 
@@ -63,7 +63,7 @@ class Category
     {
         if (!$this->programs->contains($program)) {
             $this->programs[] = $program;
-            $program->setCategory($this);
+            $program->addActor($this);
         }
 
         return $this;
@@ -72,10 +72,7 @@ class Category
     public function removeProgram(Program $program): self
     {
         if ($this->programs->removeElement($program)) {
-            // set the owning side to null (unless already changed)
-            if ($program->getCategory() === $this) {
-                $program->setCategory(null);
-            }
+            $program->removeActor($this);
         }
 
         return $this;

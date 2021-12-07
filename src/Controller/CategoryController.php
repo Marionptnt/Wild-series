@@ -12,18 +12,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Program;
-
 use App\Entity\Category;
+
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 
+
+/**
+ * @Route("/category", name="category_")
+ */
 
 class CategoryController extends AbstractController
 {
     /**
      * Filter all rows from Program by category
      *
-     * @Route("/category/", name="category_index")
+     * @Route("/", name="index")
      * @return Response A response instance
      */
     public function index(): Response
@@ -41,7 +45,7 @@ class CategoryController extends AbstractController
         ]);
     }
     /**
-     * @Route("/category/{name}", requirements={"id"="\d+"}, name="category_show")
+     * @Route("/{name}", requirements={"id"="\d+"}, name="show")
      */
     public function show(string $name, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
     {
