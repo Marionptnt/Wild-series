@@ -68,7 +68,7 @@ class ProgramController extends AbstractController
 
      *
 
-     * @Route("/{id<^[0-9]+$>}", requirements={"id"="\d+"}, name="show")
+     * @Route("/show/{id<^[0-9]+$>}", requirements={"id"="\d+"}, name="show")
 
      * @return Response
 
@@ -116,7 +116,7 @@ class ProgramController extends AbstractController
         return $this->render('templates/program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
-            'espisode' => $episode
+            'episodes' => $episode
         ]);
     }
 }
