@@ -62,16 +62,6 @@ class ProgramController extends AbstractController
         return $this->render('program/list.html.twig', ['programs' => $programs,]);
     }
 
-    /*
-    public function new(): Response
-{
-    // traitement d'un formulaire par exemple
- 
-    // redirection vers la page 'program_show',
-    // correspondant à l'url /program/4
-    return $this->redirectToRoute('program_show', ['id' => 4]);
-}*/
-
     /**
 
      * Getting a program by id
@@ -107,18 +97,6 @@ class ProgramController extends AbstractController
      */
     public function showSeason(Program $program, Season $season): Response
     {
-
-
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with id : ' . $program . ' found in program\'s table.'
-            );
-        }
-        if (!$season) {
-            throw $this->createNotFoundException(
-                'No season with id : ' . $season . ' found in season\'s table.'
-            );
-        }
 
         return $this->render('program/season_show.html.twig', [
             'program' => $program,

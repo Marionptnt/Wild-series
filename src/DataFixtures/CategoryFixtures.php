@@ -10,12 +10,12 @@ class CategoryFixtures extends Fixture
 {
 
     const CATEGORIES = [
-        'Action',
+        'Humour',
         'Aventure',
         'Annimation',
         'Fantastique',
         'Horreur',
-        'Humour'
+        'Action'
     ];
 
     public function load(ObjectManager $manager): void
