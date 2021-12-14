@@ -26,12 +26,14 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez remplir ce champ.")
      * @Assert\Length(max="255", maxMessage="Le titre saisi {{ value }} est trop long, il ne doit pas dépasser {{ limit }} caractères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Veuillez remplir ce champ.")
      * @Assert\Regex(
      *     pattern="/plus belle la vie/",
      *     match=false,
@@ -133,6 +135,7 @@ class Program
     {
         if (!$this->actor->contains($actor)) {
             $this->actor[] = $actor;
+            $actor->addProgram($this);
         }
 
         return $this;
@@ -140,8 +143,9 @@ class Program
 
     public function removeActor(Actor $actor): self
     {
-        $this->actor->removeElement($actor);
-
+        if ($this->actor->removeElement($actor)) {
+            $actor->removeProgram($this);
+        }
         return $this;
     }
 
