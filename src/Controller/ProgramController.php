@@ -4,23 +4,24 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Component\Routing\Annotation\Route;
-
-use App\Entity\Program;
 use App\Entity\Season;
+
 use App\Entity\Episode;
 
-use App\Repository\ProgramRepository;
-use App\Repository\SeasonRepository;
-use App\Repository\EpisodeRepository;
+use App\Entity\Program;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
+use App\Service\Slugify;
 use App\Form\ProgramType;
+use App\Repository\SeasonRepository;
+
+use App\Repository\EpisodeRepository;
+use App\Repository\ProgramRepository;
+use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/program", name="program_")
@@ -50,7 +51,6 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    /* écriture requirements plus condensé--> */
 
     /**
      
@@ -67,13 +67,17 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="new")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Slugify $slugify): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
+
             $entityManager->persist($program);
             $entityManager->flush();
             return $this->redirectToRoute('program_index');
@@ -85,15 +89,10 @@ class ProgramController extends AbstractController
     }
 
     /**
-
-     * Getting a program by id
-
-     *
-
-     * @Route("/show/{id<^[0-9]+$>}", requirements={"id"="\d+"}, name="show")
-
+     * Getting a program by slug 
+     * @Route("/{slug}", methods={"GET"}, name="show")
+     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}})
      * @return Response
-
      */
 
     public function show(Program $program, SeasonRepository $seasonRepository): Response
