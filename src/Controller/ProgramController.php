@@ -114,7 +114,8 @@ class ProgramController extends AbstractController
 
 
     /**
-     * @Route("/{program}/seasons/{season}", name="season_show")
+     * @Route("/{slug}/seasons/{season}", name="season_show")
+     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}})
      */
     public function showSeason(Program $program, Season $season): Response
     {
@@ -125,19 +126,16 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{programId}/seasons/{seasonId}/episode/{episodeId}", name="episode_show")
-     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"programId": "id"}})
-     * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"seasonId": "id"}})
-     * @ParamConverter("episode", class="App\Entity\Episode", options={"mapping": {"episodeId": "id"}})
-     */
+    #[Route('/{program_slug}/season/{season}/episode/{episode_slug}', name: 'episode_show', methods: ['GET', 'POST'])]
+    #[ParamConverter('program', options: ['mapping' => ['program_slug' => 'slug']])]
+    #[ParamConverter('episode', options: ['mapping' => ['episode_slug' => 'slug']])]
     public function showEpisode(Program $program, Season $season, Episode $episode): Response
     {
 
-        return $this->render('templates/program/episode_show.html.twig', [
+        return $this->render('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
-            'episodes' => $episode
+            'episode' => $episode
         ]);
     }
 }
