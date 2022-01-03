@@ -8,16 +8,17 @@ use App\Entity\Season;
 use App\Entity\Episode;
 use App\Entity\Program;
 
-use App\Form\ProgramType;
-use App\Form\SearchProgramType;
-
 use App\Service\Slugify;
+use App\Form\ProgramType;
+
+use App\Form\SearchProgramType;
 
 use App\Repository\SeasonRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,7 +74,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="new")
      */
-    public function new(Request $request, Slugify $slugify): Response
+    public function new(Request $request, Slugify $slugify, MailerInterface $mailer): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -81,11 +82,22 @@ class ProgramController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
+            // add Slug in BDD
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
-
             $entityManager->persist($program);
             $entityManager->flush();
+
+            //send an email when you add a new program
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to('your_email@example.com')
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView('Program/newProgramEmail.html.twig', ['program' => $program]));
+
+            $mailer->send($email);
+
+            //redirect to program's list
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/new.html.twig', [
