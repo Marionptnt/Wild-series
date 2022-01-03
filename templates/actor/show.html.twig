@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Actor
+{% block title %}Filmographie
 {% endblock %}
 
 {% block body %}
@@ -8,10 +8,6 @@
 
 	<table class="table">
 		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ actor.id }}</td>
-			</tr>
 			<tr>
 				<th>Nom</th>
 				<td>{{ actor.name }}</td>
@@ -21,7 +17,7 @@
 				<td>
 					{% for program in actor.programs %}
 						<li>
-							<a href="{{ path("program_show", { id: program.id }) }}">{{ program.title }}</a>
+							<a href="{{ path("program_show", { slug: program.slug }) }}">{{ program.title }}</a>
 						</li>
 					{% else %}
 						<li>Aucune série pour cet acteur</li>

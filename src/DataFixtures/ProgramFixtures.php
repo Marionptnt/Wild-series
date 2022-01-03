@@ -56,6 +56,17 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setSummary($programData['summary']);
             $program->setPoster($programData['poster']);
             $program->setCategory($this->getReference($programData['category']));
+
+            if (preg_match("/walking dead/i", $programData['title'])) {
+                foreach (ActorFixtures::ACTORS_WALKING_DEAD as $i => $actorData) {
+                    $program->addActor($this->getReference('actor_walking_dead_' . $i));
+                }
+            }
+            if (preg_match("/the big bang theory/i", $programData['title'])) {
+                foreach (ActorFixtures::ACTORS_THE_BIG_BANG_THEORY as $i => $actorData) {
+                    $program->addActor($this->getReference('actor_the_big_bang_theory_' . $i));
+                }
+            }
             $this->addReference('program_' . $programData['title'], $program);
             $slug = $this->slugify->generate($program->getTitle());
             $program->setSlug($slug);
@@ -73,10 +84,11 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     {
 
         return [
-
             CategoryFixtures::class,
+            ActorFixtures::class,
 
 
         ];
     }
+    
 }

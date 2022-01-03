@@ -8,7 +8,7 @@ use App\Entity\Actor;
 
 class ActorFixtures extends Fixture
 {
-    public const ACTORS_THE_WALKING_DEAD = [
+    public const ACTORS_WALKING_DEAD = [
         'Andrew Lincoln',
         'Norman Reedus',
         'Lauren Cohan',
@@ -30,10 +30,10 @@ class ActorFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach (self::ACTORS_THE_WALKING_DEAD as $i => $actorData) {
+        foreach (self::ACTORS_WALKING_DEAD as $i => $actorData) {
             $actor=new Actor();
             $actor->setName($actorData);
-            $this->addReference('actor_the_walking_dead_' . $i, $actor);
+            $this->addReference('actor_walking_dead_' . $i, $actor);
             $manager->persist($actor);
         }
         foreach (self::ACTORS_THE_BIG_BANG_THEORY as $i => $actorData) {
