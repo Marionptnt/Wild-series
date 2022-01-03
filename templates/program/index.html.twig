@@ -7,6 +7,11 @@
 	<h1>Retrouvez toutes vos séries :
 	</h1>
 
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button>Recherche une série</button>
+	{{ form_end(form) }}
+
 	{% for program in programs %}
 		<div class="programs-list">
 			<div class="media">
