@@ -8,6 +8,8 @@ use App\Form\EpisodeType;
 use App\Repository\EpisodeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +38,8 @@ class EpisodeController extends AbstractController
             $episode->setSlug($slug);
             $entityManager->persist($episode);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Un nouvel épisode a été créé');
 
              //send an email when you add a new program
             $email = (new Email())
@@ -90,6 +94,7 @@ class EpisodeController extends AbstractController
             $entityManager->remove($episode);
             $entityManager->flush();
         }
+        $this->addFlash('danger', "L'épisode a été supprimé");
 
         return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
     }

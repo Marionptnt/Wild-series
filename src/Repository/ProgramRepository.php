@@ -41,7 +41,7 @@ class ProgramRepository extends ServiceEntityRepository
 public function findAllWithProgramsAndActors(string $name)
     {
         $queryBuilder = $this->createQueryBuilder('p')
-            ->join('p.actors', 'a')
+            ->join('p.actor', 'a')
             ->where('p.title LIKE :name')
             ->orWhere('a.name LIKE :name')
             ->setParameter('name', '%' . $name . '%')
