@@ -28,9 +28,14 @@ class Comment
     private $rate;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      */
     private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Episode::class, inversedBy="comments")
+     */
+    private $episode;
 
     public function getId(): ?int
     {
@@ -69,6 +74,18 @@ class Comment
     public function setAuthor(?user $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getEpisode(): ?Episode
+    {
+        return $this->episode;
+    }
+
+    public function setEpisode(?Episode $episode): self
+    {
+        $this->episode = $episode;
 
         return $this;
     }

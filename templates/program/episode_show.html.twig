@@ -1,27 +1,51 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<div class="card m-5" style="width: 18rem; margin-left: 2rem; margin-right: 2rem">
-		<img class="card-img-top" style="height: 20rem;" src="{{program.poster}}" alt="Card image cap">
-		<div class="card-body">
-			<h5 class="card-title">{{program.title}}</h5>
-			<div>
-				<h3>
-					Saison
-					{{ season.number }}
-				</h3>
-				<p>
-					Episode
-					{{ episode.number }}
-					:
-					{{ episode.title }}
-				</p>
+	<div>
+		<img src="{{program.poster}}" alt="image de la série">
+		<div class="episode-show">
+			<h3>{{program.title}}</h5>
 
-				<h2>Résumé :</h2>
-				<p>
-					{{ episode.synopsis }}
-				</p>
-			</div>
-			<p class="card-text" style="height: 5rem; font-size: 1rem;">{{episode.synopsis}}</p>
+			<h4>
+				Saison
+				{{ season.number }}
+			</h4>
+			<h4>
+				Episode
+				{{ episode.number }}
+				:
+				{{ episode.title }}
+			</h4>
+
+			<h4>Résumé :</h4>
+			<p>
+				{{ episode.synopsis }}
+			</p>
+		</div>
+		<div class="comments">
+
+
+			<h4>Tous les commentaires de l'épisode :
+				{{ episode.title }}
+			</h4>
+			<pre>
+			
+			</pre>
+			{% for comment in comments %}
+
+				<p>{{ comment.comment }}</p>
+				<span>{{ comment.rate }}</span>
+
+
+			{% else %}
+
+				<p>pas de commentaires pour cet épisode</p>
+
+			{% endfor %}
+			<h4>Ecrire un commentaire
+			</h4>
+			{% if app.user %}
+				{% include "comment/_form.html.twig" %}
+			{% endif %}
 
 		</div>
 	</div>

@@ -5,16 +5,19 @@
 namespace App\Controller;
 
 use App\Entity\Season;
+use App\Entity\Comment;
 use App\Entity\Episode;
+
 use App\Entity\Program;
-
 use App\Service\Slugify;
+
+use App\Form\CommentType;
+
 use App\Form\ProgramType;
-
 use App\Form\SearchProgramType;
-
 use Symfony\Component\Mime\Email;
 use App\Repository\SeasonRepository;
+use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -150,16 +154,38 @@ class ProgramController extends AbstractController
     #[Route('/{program_slug}/season/{season}/episode/{episode_slug}', name: 'episode_show', methods: ['GET', 'POST'])]
     #[ParamConverter('program', options: ['mapping' => ['program_slug' => 'slug']])]
     #[ParamConverter('episode', options: ['mapping' => ['episode_slug' => 'slug']])]
-    public function showEpisode(Program $program, Season $season, Episode $episode): Response
+    public function showEpisode(Program $program, Season $season, Episode $episode, Request $request, EntityManagerInterface $entityManager, CommentRepository $commentRepository): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->getUser() == null) {
+                return $this->redirectToRoute('login');
+
+                throw new AccessDeniedException('Only the owner can edit the program!');
+            }
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('program_episode_show', [
+                'program_slug' => $program->getSlug(),
+                'season' => $season->getId(),
+                'episode_slug' => $episode->getSlug(),
+            ]);
+        }
 
         return $this->render('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
-            'episode' => $episode
+            'episode' => $episode,
+            'comments' => $commentRepository->findByEpisode($episode, ['id' => 'asc']),
+            'form' => $form->createView()
         ]);
     }
-
     /**
      * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
      * @return Response
