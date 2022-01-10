@@ -34,13 +34,10 @@ class CategoryController extends AbstractController
     public function index(): Response
     {
         $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findAll();
-
-
+                            ->getRepository(Category::class)
+                            ->findAll();
 
         return $this->render('category/index.html.twig', [
-
             'categories' => $categories,
 
         ]);
@@ -68,6 +65,9 @@ class CategoryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Une nouvelle catégorie a été créée');
+
             return $this->redirectToRoute('category_index');
         }
         return $this->render('category/new.html.twig', [
@@ -85,7 +85,7 @@ class CategoryController extends AbstractController
 
         if (!$category) {
             throw $this->createNotFoundException(
-                'No category with name : ' . $name . ' found in category\'s table.'
+                'Aucune catégorie trouvée pour ' . $name
             );
         } else {
             $programs = $programRepository->findByCategory($category, ['id' => 'desc'], '3');

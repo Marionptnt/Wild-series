@@ -26,7 +26,7 @@ class DefaultController extends AbstractController
 
         return $this->render('/index.html.twig', [
 
-            'website' => 'Welcome !',
+            'website' => 'Welcome to Wild Series !',
 
         ]);
     }

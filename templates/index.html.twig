@@ -1,9 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+	{% if app.user %}
+
+		<h1>Welcome to Wild Series
+		</h1>
+		<h2>{{ app.user.email }}</h2>
 
 
-	<h1>{{ website }}</h1>
+	{% else %}
 
+		<h1>{{ website }}</h1>
+
+	{% endif %}
 
 {% endblock %}

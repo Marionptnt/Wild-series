@@ -13,11 +13,12 @@ use App\Form\ProgramType;
 
 use App\Form\SearchProgramType;
 
+use Symfony\Component\Mime\Email;
 use App\Repository\SeasonRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,7 +75,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="new")
      */
-    public function new(Request $request, Slugify $slugify, MailerInterface $mailer): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Slugify $slugify, MailerInterface $mailer): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -91,13 +92,13 @@ class ProgramController extends AbstractController
             $this->addFlash('success', 'Une nouvelle série a été crée');
 
             //send an email when you add a new program
-            $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
-                ->to('your_email@example.com')
-                ->subject('Une nouvelle série vient d\'être publiée !')
-                ->html($this->renderView('Program/newProgramEmail.html.twig', ['program' => $program]));
+            // $email = (new Email())
+            //     ->from($this->getParameter('mailer_from'))
+            //     ->to('dev.marionpatinet@gmail.com')
+            //     ->subject('Une nouvelle série vient d\'être publiée !')
+            //     ->html($this->renderView('Program/newProgramEmail.html.twig', ['program' => $program]));
 
-            $mailer->send($email);
+            // $mailer->send($email);
 
             //redirect to program's list
             return $this->redirectToRoute('program_index');
@@ -159,10 +160,35 @@ class ProgramController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
+     * @return Response
+     */
+    public function edit(Request $request, Program $program, Slugify $slugify): Response
+    {
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $program->setSlug($slugify->generate($program->getTitle()));
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Un nouveau programme a bien été modifié');
+
+            return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('delete/{slug}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Program $program, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
+ 
             $entityManager->remove($program);
             $entityManager->flush();
 

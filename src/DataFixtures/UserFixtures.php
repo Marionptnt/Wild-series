@@ -35,14 +35,7 @@ class UserFixtures extends Fixture
 
         $contributor->setRoles(['ROLE_CONTRIBUTOR']);
 
-        $hashedPassword = $this->passwordHasher->hashPassword(
-
-            $contributor,
-
-            'contributorpassword'
-
-        );
-
+        $hashedPassword = $this->passwordHasher->hashPassword($contributor,'contributorpassword');
 
         $contributor->setPassword($hashedPassword);
 
