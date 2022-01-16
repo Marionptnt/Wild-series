@@ -7,8 +7,9 @@ namespace App\Controller;
 use App\Entity\Season;
 use App\Entity\Comment;
 use App\Entity\Episode;
-
+use App\Entity\User;
 use App\Entity\Program;
+
 use App\Service\Slugify;
 
 use App\Form\CommentType;
@@ -20,12 +21,16 @@ use App\Repository\SeasonRepository;
 use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -81,15 +86,20 @@ class ProgramController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Slugify $slugify, MailerInterface $mailer): Response
     {
+        // new program is create
         $program = new Program();
+        // with the program's form
         $form = $this->createForm(ProgramType::class, $program);
+        // Get data from HTTP request
         $form->handleRequest($request);
+        // Was the form submitted ?
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
+            // Add user actuel    
+            $program->setOwner($this->getUser());
             // add Slug in BDD
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
+
             $entityManager->persist($program);
             $entityManager->flush();
 
@@ -164,7 +174,7 @@ class ProgramController extends AbstractController
             if ($this->getUser() == null) {
                 return $this->redirectToRoute('login');
 
-                throw new AccessDeniedException('Only the owner can edit the program!');
+                throw new AccessDeniedException('Vous devez être connecté pour laisser un commentaire.');
             }
             $comment->setAuthor($this->getUser());
             $comment->setEpisode($episode);
@@ -196,6 +206,14 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Check wether the logged in user is the owner of the program
+            if (!($this->getUser() == $program->getOwner())) {
+
+                // If not the owner, throws a 403 Access Denied exception
+                throw new AccessDeniedException('Seul son auteur peut modifier cette série.');
+
+        }
             $program->setSlug($slugify->generate($program->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
