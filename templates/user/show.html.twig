@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <h2>PROFIL</h2>
+
+    <ul>
+      <li> Email : {{ user.email }}</li>
+      <li> Roles : {{ user.roles ? user.roles|json_encode : '' }}</li>
+      
+    </ul>   
+    {% for program in user.programs %}
+        <ul>
+            <li>{{ program.title }}</li>
+        </ul>
+	{% else %}
+			Vous n'avez pas encore ajouté de série.
+	{% endfor %}         
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier mon profil</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

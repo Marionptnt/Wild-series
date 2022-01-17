@@ -20,14 +20,15 @@
 		{% if app.user %}
 
 			{{ app.user.email }}
-
+			<a href="{{ path('user_show') }}">Mon compte</a>
 			<a href="{{ path('app_logout') }}">
-				Se déconnecter</a>
+				Déconnexion</a>
 
 		{% else %}
-
+			<a href="{{ path('app_register') }}">Inscription</a>
 			<a href="{{ path('login') }}">
-				Se connecter</a>
+				Connection</a>
 		{% endif %}
+
 	</div>
 </nav>

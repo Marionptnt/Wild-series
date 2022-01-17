@@ -1,12 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Séries par catégories
+{% block title %}Catégories {{ category.name }}
 {% endblock %}
 
 {% block body %}
-	<h1>Retrouvez toutes vos séries par catégories :
+	<h1>{{ category.name }}
 	</h1>
-	{{ category.name }}
+	
+{% for program in programs %}
+	<ul>
+		<li>{{ program.title }}</li>
+	</ul>
+	{% else %}
+			Aucune série dans la catégorie {{ category.name }}.
+		{% endfor %}
 
 
 {% endblock %}

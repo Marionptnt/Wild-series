@@ -44,7 +44,7 @@ class UserFixtures extends Fixture
         $admin->setRoles(['ROLE_ADMIN']);
         $hashedPassword = $this->passwordHasher->hashPassword($admin,'adminpassword');
         $admin->setPassword($hashedPassword);
-        $this->addReference(['user_' . 'admin@monsite.com'], $admin);
+        $this->addReference('user_admin@monsite.com', $admin);
         $manager->persist($admin);
 
 
@@ -53,7 +53,7 @@ class UserFixtures extends Fixture
         $contributor->setRoles(['ROLE_CONTRIBUTOR']);
         $hashedPassword = $this->passwordHasher->hashPassword($contributor,'marionp');
         $contributor->setPassword($hashedPassword);
-        $this->addReference(['user_' . 'marionp@monsite.com'], $contributor);
+        $this->addReference('user_marionp@monsite.com', $contributor);
 
         $manager->persist($contributor);
 
