@@ -3,20 +3,20 @@
 	<div>
 		<img src="{{program.poster}}" alt="image de la série">
 		<div class="episode-show">
-			<h3>{{program.title}}</h5>
+			<h2>{{program.title}}</h2>
 
 			<h4>
-				Saison
+				SAISON
 				{{ season.number }}
 			</h4>
 			<h4>
-				Episode
+				Episode 
 				{{ episode.number }}
-				:
+				-
 				{{ episode.title }}
 			</h4>
 
-			<h4>Résumé :</h4>
+			<h4>RESUME</h4>
 			<p>
 				{{ episode.synopsis }}
 			</p>
@@ -24,29 +24,31 @@
 		<div class="comments">
 
 
-			<h4>Tous les commentaires de l'épisode :
-				{{ episode.title }}
-			</h4>
-			<pre>
+			<h4>COMMENTAIRES</h4>
 			
-			</pre>
 			{% for comment in comments %}
 
 				<p>{{ comment.comment }}</p>
 				<span>{{ comment.rate }}</span>
 
+				{% if is_granted("ROLE_CONTRIBUTOR") %}
+    				<a href="{{ path('comment_edit', { 'id': comment.id} ) }}">Éditer</a>
+					<a href="{{ path('comment_delete', { 'id': comment.id} ) }}">Supprimer</a>
+				{% endif %}
 
 			{% else %}
 
 				<p>pas de commentaires pour cet épisode</p>
 
 			{% endfor %}
-			<h4>Ecrire un commentaire
-			</h4>
-			{% if app.user %}
-				{% include "comment/_form.html.twig" %}
-			{% endif %}
+			<h5>Ecrire un commentaire</h5>
+			<div class="add-comment">
+				
+					{% if app.user %}
+						{% include "comment/_form.html.twig" %}
+					{% endif %}
 
+			</div>
 		</div>
 	</div>
 {% endblock %}

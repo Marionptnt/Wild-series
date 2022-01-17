@@ -50,3 +50,7 @@ security:
     access_control:
         - { path: ^/program/new, roles: ROLE_CONTRIBUTOR  }
         - { path: ^/program/[a-z-]+/edit, roles: ROLE_CONTRIBUTOR }
+        - { path: ^/comment/new, roles: ROLE_CONTRIBUTOR  }
+        - { path: ^/comment/[a-z-0-9]+/edit, roles: ROLE_CONTRIBUTOR }
+        - { path: ^/comment/[a-z-0-9]+/delete, roles: ROLE_CONTRIBUTOR }
+        

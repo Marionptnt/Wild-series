@@ -90,7 +90,7 @@ class ProgramController extends AbstractController
         $program = new Program();
         // with the program's form
         $form = $this->createForm(ProgramType::class, $program);
-        // Get data from HTTP request
+        // Analyse the request
         $form->handleRequest($request);
         // Was the form submitted ?
         if ($form->isSubmitted() && $form->isValid()) {
