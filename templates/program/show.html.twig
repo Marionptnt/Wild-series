@@ -10,7 +10,7 @@
 	
 		{% if is_granted("ROLE_USER") %}
 
-        	<a href="{{ path('program_watchlist', {slug: program.slug})}}">
+        	<a id="watchlist" href="{{ path('program_watchlist', {slug: program.slug})}}">
     			<i class="bi {{ app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
 			</a>
 			{# {{ dump(app.user.isInWatchlist(program)) }} #}

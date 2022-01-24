@@ -8,15 +8,15 @@
     <ul>
       <li> Email : {{ user.email }}</li>
       <li> Roles : {{ user.roles ? user.roles|json_encode : '' }}</li>
-      
-    </ul>   
+      </ul>   
     {% for program in user.programs %}
         <ul>
             <li>{{ program.title }}</li>
         </ul>
 	{% else %}
 			Vous n'avez pas encore ajouté de série.
-	{% endfor %}         
+	{% endfor %}     
+
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier mon profil</a>
 

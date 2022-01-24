@@ -244,7 +244,7 @@ class ProgramController extends AbstractController
 
     //add a program to a favorite list
 
-    #[ParamConverter('program', options: ['mapping' => ['slug' => 'slug']])]
+    
     #[Route('/{slug}/watchlist', name: 'watchlist', methods: ['GET', 'POST'])]
     public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
     {
@@ -254,11 +254,18 @@ class ProgramController extends AbstractController
             $this->getUser()->addToWatchlist($program);
         }
         $entityManager->flush();
-    
-        return $this->redirectToRoute('program_show', [
-            'slug' => $program->getSlug(),
-          
+        
+        return $this->json([
+
+            'isInWatchlist' => $this->getUser()->isInWatchlist($program)
+        
         ]);
+
+        //redirect without Json
+        // return $this->redirectToRoute('program_show', [
+        //     'slug' => $program->getSlug(),
+          
+        // ]);
     
     }
 }
