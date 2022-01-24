@@ -227,7 +227,7 @@ class ProgramController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
     #[Route('delete/{slug}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Program $program, EntityManagerInterface $entityManager): Response
     {
@@ -242,4 +242,23 @@ class ProgramController extends AbstractController
         return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    //add a program to a favorite list
+
+    #[ParamConverter('program', options: ['mapping' => ['slug' => 'slug']])]
+    #[Route('/{slug}/watchlist', name: 'watchlist', methods: ['GET', 'POST'])]
+    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->getUser()->getWatchlist()->contains($program)) {
+            $this->getUser()->removeFromWatchlist($program);
+        } else {
+            $this->getUser()->addToWatchlist($program);
+        }
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('program_show', [
+            'slug' => $program->getSlug(),
+          
+        ]);
+    
+    }
 }

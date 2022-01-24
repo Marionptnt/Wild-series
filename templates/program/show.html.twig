@@ -4,8 +4,18 @@
 {% endblock %}
 
 {% block body %}
+
 	<div class="programs-list">
 		<div class="media">
+	
+		{% if is_granted("ROLE_USER") %}
+
+        	<a href="{{ path('program_watchlist', {slug: program.slug})}}">
+    			<i class="bi {{ app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+			</a>
+			{# {{ dump(app.user.isInWatchlist(program)) }} #}
+        {% endif %}
+
 			<img src=" {{program.poster}} " alt="image de la série {{ program.title }} poster" width=" 180px">
 			<div class="media-body">
 				<h1>{{ program.title }}</h1>
@@ -38,8 +48,10 @@
 
 				{% endif %}
 			</div>
+
 		</div>
 	</div>
+
 	<a href="{{ path('program_index') }}">
 		<button class="button">
 			Retour à la liste des programmes</button>
