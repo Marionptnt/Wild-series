@@ -17,18 +17,18 @@
 				<a class="nav-link" href="{{ path('actor_index') }}">Acteurs</a>
 			</li>
 		</ul>
+
 		{% if app.user %}
 
-			{{ app.user.email }}
-			<a href="{{ path('user_show') }}">Mon compte</a>
-			<a href="{{ path('app_logout') }}">
-				Déconnexion</a>
+   		{% trans with {'%username%': app.user.email} %}
+       		hello_username
+   		{% endtrans %} !
 
+			<a href="{{ path('user_show') }}">{{ 'account.profile'|trans }}</a>
+			<a href="{{ path('app_logout') }}"> {{ 'account.logout'|trans }}</a>
 		{% else %}
-			<a href="{{ path('app_register') }}">Inscription</a>
-			<a href="{{ path('login') }}">
-				Connection</a>
+			<a href="{{ path('app_register') }}">{{ 'account.sign_in'|trans }}</a>
+			<a href="{{ path('login') }}"> {{ 'account.login'|trans }}</a>
 		{% endif %}
-
 	</div>
 </nav>

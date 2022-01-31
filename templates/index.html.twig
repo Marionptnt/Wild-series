@@ -3,14 +3,14 @@
 {% block body %}
 	{% if app.user %}
 
-		<h1>Welcome to Wild Series
+		<h1>{{'welcome'|trans}}
 		</h1>
 		<h2>{{ app.user.email }}</h2>
 
 
 	{% else %}
 
-		<h1>{{ website }}</h1>
+		<h1>{{'welcome'|trans}}</h1>
 
 	{% endif %}
 

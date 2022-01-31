@@ -1,0 +1,89 @@
+welcome: Welcome to Wild Series
+language: Language
+Categories: Categories
+Series: Series
+Seasons: Seasons
+Episodes: Episodes
+Actors: Actors
+Comments: Comments
+English: English
+French: French
+Delete: Delete
+account:
+    sign_in: Sign In
+    register: Create Account
+    login: Login
+    logout: Logout
+    profile: My profile
+Save: Save
+Season: Season
+Episode: Episode
+'Synopsis of episode': 'Synopsis of episode'
+'Add a comment': 'Add a comment'
+'Are you sure you want to delete this item': 'Are you sure you want to delete this item'
+'Edit the season': 'Edit the season'
+'Add to list': 'Add to list'
+'Back to home': 'Back to home'
+'All series': 'All series'
+'Search for a series': 'Search for a series'
+'See the notice': 'See the notice'
+Category: Category
+'No series found': 'No series found'
+'Create new actor': 'Create new actor'
+'Back to list': 'Back to list'
+Actor: Actor
+Actors:Actors
+Name: Name
+'No series for this actor': 'No series for this actor'
+Edit: Edit
+Actions: Actions
+Show: Show
+'No actor found': 'No actor found'
+'Edit Actor': 'Edit Actor'
+'Create new Season': 'Create new Season'
+Description: Description
+'Season number': 'Season number'
+Year: Year
+'No season': 'No season'
+'Create new season': 'Create new season'
+'List of episodes': 'List of episodes'
+'List of actors': 'List of actors'
+'No actor for this series': 'No actor for this series'
+'Back to the series list': 'Back to the series list'
+'New program': 'New program'
+Created: Created
+'Hello, the new program': 'Hello, the new program'
+'has been created on Wild Series': 'has been created on Wild Series'
+Summary: Summary
+'Create new Comment': 'Create new Comment'
+Comment: Comment
+Rate: Rate
+'List of comments': 'List of comments'
+'No comment found': 'No comment found'
+'Create new comment': 'Create new comment'
+'Edit comment': 'Edit comment'
+'Create new Episode': 'Create new Episode'
+'New episode': 'New episode'
+'New episode created': 'New episode created'
+'Episode title': 'Episode title'
+Number: Number
+'Season episode': 'Season episode'
+'Link to the episodes of this series': 'Link to the episodes of this series'
+Title: Title
+'Episode number': 'Episode number'
+Synopsis: Synopsis
+'No episode found': 'No episode found'
+'Create new episode': 'Create new episode'
+'Edit a episode': 'Edit a episode'
+'Create an account': 'Create an account'
+Register: Register
+Email: Email
+Password: Password
+'Add category': 'Add category'
+'Category serie': 'Category serie'
+'No serie found': 'No serie found'
+'Create new category': 'Create new category'
+Hello: Hello
+'This friendly message is coming from': 'This friendly message is coming from'
+'Your controller at': 'Your controller at'
+'Your template at': 'Your template at'

@@ -1,0 +1,94 @@
+welcome: Bienvenue sur Wild Series
+language: Langue
+Categories: Catégories
+Series: Séries
+Seasons: Saisons
+Episodes: Episodes
+Actors: Acteurs
+Comments: Commentaires
+account:
+    sign_in: Inscription
+    register: Créer un compte
+    login: Se connecter
+    logout: Déconnexion
+    profile: Mon compte
+English: Anglais
+French: Français
+Delete: Supprimer
+'Back to the list': 'Retour à la liste'
+'Hello useremail': 'Salut %useremail%'
+'My account': 'Mon compte'
+'Log out': Déconnexion
+'Log in': Connexion
+Save: Enregistrer
+Season: Saison
+Episode: Episode
+'Synopsis of episode': 'Résumé de l''épisode'
+'Add a comment': 'Ajouter un commentaire'
+'Are you sure you want to delete this item': 'Etes-vous sûr de vouloir supprimer cet élément'
+'Add to list': 'Ajouter à la liste'
+'Back to home': 'Retour à l''acceuil'
+'All series': 'Toutes les séries'
+'Search for a series': 'Recherche une série'
+'See the notice': 'Voir l''avis'
+Category: Catégorie
+'No series found': 'Pas de série trouvée'
+'Edit the season': 'Editer une saison'
+'Create new actor': 'Créér un nouvel acteur'
+'Back to list': 'Retour à la liste'
+Actor: Acteur
+Actors: Acteurs
+Name: Nom
+'No series for this actor': 'Pas de série pour cet acteur'
+Edit: Editer
+Actions: Actions
+Show: Voir
+'No actor found': 'Pas d''acteur trouvé'
+'Edit Actor': 'Editer un acteur'
+'Create new Season': 'Créér une nouvelle saison'
+Description: Description
+'Season number': 'Numéro de la saison'
+Year: Année
+'No season': 'Pas de saison'
+'Create new season': 'Créér une nouvelle saison'
+'List of episodes': 'Liste des épisodes'
+'List of actors': 'Liste des acteurs'
+'No actor for this series': 'Pas d''acteur pour cette série'
+'Back to the series list': 'Retour à la liste des séries'
+'New program': 'Nouvelle série'
+Created: Créér
+'Hello, the new program': 'Salut, la nouvelle série'
+'has been created on Wild Series': 'a été créée dans Wild Series'
+Summary: Résumé
+'Create new Comment': 'Créér un nouveau commentaire'
+Comment: Commentaire
+Rate: Note
+'List of comments': 'Liste des commentaires'
+'No comment found': 'Pas de commentaire trouvé'
+'Create new comment': 'Créér un nouveau commentaire'
+'Edit comment': 'Editer un commentaire'
+'Create new Episode': 'Créér un nouvel épisode'
+'New episode': 'Nouvel épisode'
+'New episode created': 'Nouvel épisode créé'
+'Episode title': 'Titre de l''épisode'
+Number: Nombre
+'Season episode': 'Episode le la saison'
+'Link to the episodes of this series': 'Lien vers les épisodes de sa série'
+Title: Titre
+'Episode number': 'Numéro de l''épisode'
+Synopsis: Résumé
+'No episode found': 'Pas d''épisode trouvé'
+'Create new episode': 'Créér un nouvel épisode'
+'Edit a episode': 'Editer un épisode'
+'Create an account': 'Créér un compte'
+Register: 'S''inscrire'
+Email: E-mail
+Password: 'Mot de passe'
+'Add category': 'Ajouter une catégorie'
+'Category serie': 'Série de la catégorie'
+'No serie found': 'Pas de série trouvé'
+'Create new category': 'Créér une nouvelle categorie'
+Hello: Salut
+'This friendly message is coming from': 'Ce message vient de'
+'Your controller at': 'Votre contrôleur à'
+'Your template at': 'Votre modèle à'

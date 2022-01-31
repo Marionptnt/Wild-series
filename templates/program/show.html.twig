@@ -20,7 +20,7 @@
 			<div class="media-body">
 				<h1>{{ program.title }}</h1>
 				<p>{{ program.summary }}</p>
-				<p>Catégorie :
+				<p>{{ 'Category'|trans }} :
 					{{ program.category.name }}</p>
 
 
@@ -32,19 +32,19 @@
 							{{season.year}}</p>
 					</a>
 				{% endfor %}
-				<strong>Acteurs :</strong>
+				<strong>{{ 'Actors'|trans }} :</strong>
 				<ul>
 					{% for actor in program.actor %}
 						<li>
 							<a href="{{ path("actor_show", { id: actor.id }) }}">{{ actor.name }}</a>
 						</li>
 					{% else %}
-						<li>Aucun acteur pour cette série</li>
+						<li>{{ 'No series for this actor'|trans }}</li>
 					{% endfor %}
 				</ul>
 				{% if is_granted("ROLE_ADMIN") %}
 
-					<a href="{{ path('program_edit', { 'slug': program.slug} ) }}">Modifier</a>
+					<a href="{{ path('program_edit', { 'slug': program.slug} ) }}">{{ 'Edit'|trans }}</a>
 
 				{% endif %}
 			</div>
