@@ -4,9 +4,9 @@
 			<li class="nav-item">
 				<a class="nav-link active" aria-current="page" href="{{ path('program_index') }}">WILD SERIES</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{ path('category_index') }}">Catégories</a>
-			</li>
+			<div class="dropdown">
+				{{ render(controller('App\\Controller\\HomeController::navbarTop')) }}
+			 </div>
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path('season_index') }}">Saisons</a>
 			</li>

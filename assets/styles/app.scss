@@ -17,8 +17,13 @@ body {
     justify-content: center;
     text-align: center;
 }
-a:link{
-    text-decoration:none; 
+.nav-link {
+    color: var(--bg-color-body);
+}
+
+a{
+    text-decoration:none;
+    color: var(--bg-color-body);  
 }
 
 ul {
