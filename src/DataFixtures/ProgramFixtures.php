@@ -2,9 +2,10 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\Program;
-use App\Service\Slugify;
 
+use App\Service\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -55,6 +56,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setTitle($programData['title']);
             $program->setSummary($programData['summary']);
             $program->setPoster($programData['poster']);
+            $program->setUpdatedAt(new DateTime('now'));
             $program->setCategory($this->getReference($programData['category']));
             $program->setOwner($this->getReference('user_marionp@monsite.com'));
 

@@ -17,7 +17,7 @@
 			<div class="media">
 				<h2 class="title-program">
 					{{ program.title }}</h2>
-				<img src="{{program.poster}}" alt="{{ program.title }} poster" width="180px">
+				<img src="{{ vich_uploader_asset(program) }}" width=" 180px" alt="{{ program.title }}">
 
 				<h3>Catégorie :
 					{{ program.category.name }}</h3>

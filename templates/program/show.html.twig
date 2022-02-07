@@ -42,7 +42,7 @@
 						<li>{{ 'No series for this actor'|trans }}</li>
 					{% endfor %}
 				</ul>
-				{% if is_granted("ROLE_ADMIN") %}
+				{% if is_granted("ROLE_CONTRIBUTOR") %}
 
 					<a href="{{ path('program_edit', { 'slug': program.slug} ) }}">{{ 'Edit'|trans }}</a>
 
